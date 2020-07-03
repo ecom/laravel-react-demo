@@ -16,10 +16,14 @@
 ```
 git clone git@github.com:ecom/laravel-react-demo.git
 cd laravel-react-demo
+cp .env.dev.example .env
 composer install
+npm install
+php vendor/bin/homestead make
 vagrant up
 php artisan migrate
 php artisan serve
+npm run watch
 ```
 
 ### Daily Run
@@ -27,4 +31,5 @@ php artisan serve
 ```
 vagrant up
 php artisan serve
+npm run watch
 ```
