@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
 
-mix.ts('resources/js/app.ts', 'public/js');
+mix.ts('resources/react/app/index.tsx', 'public/js/app.js').sourceMaps();
 
-mix.browserSync('localhost:8000');
+mix.browserSync('192.168.10.10');

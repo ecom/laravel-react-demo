@@ -22,7 +22,6 @@ npm install
 php vendor/bin/homestead make
 vagrant up
 php artisan migrate
-php artisan serve
 npm run watch
 ```
 
@@ -30,6 +29,5 @@ npm run watch
 
 ```
 vagrant up
-php artisan serve
 npm run watch
 ```

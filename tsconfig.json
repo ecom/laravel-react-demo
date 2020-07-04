@@ -16,6 +16,6 @@
         "noImplicitAny": true,
         "strictNullChecks": true
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx"],
+    "include": ["resources/react/**/*.ts", "resources/react/**/*.tsx"],
     "exclude": ["**/*.spec.ts", "**/*.spec.tsx"]
 }
