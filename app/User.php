@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'email', 'email_verified_at', 'password', 'remember_token',
     ];
 
     /**
@@ -36,4 +36,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['avatar', 'portrait'];
+
+    /**
+     * Get the user avatar.
+     */
+    public function avatar()
+    {
+        return $this->belongsTo('App\Image');
+    }
+
+    /**
+     * Get the user portrait.
+     */
+    public function portrait()
+    {
+        return $this->belongsTo('App\Image');
+    }
 }

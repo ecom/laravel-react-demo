@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Navbar() {
     const classes = useStyles();
     return (
-        <AppBar className={classes.root} position="sticky" color="transparent">
+        <AppBar className={classes.root} position="fixed" color="transparent">
             <Toolbar variant="dense">
                 <IconButton
                     edge="start"

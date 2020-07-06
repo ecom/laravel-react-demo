@@ -20,14 +20,19 @@ cp .env.dev.example .env
 composer install
 npm install
 php vendor/bin/homestead make
+
 vagrant up
+vagrant ssh
 php artisan migrate
-npm run watch
+php artisan storage:link
+exit
+
+npm start
 ```
 
 ### Daily Run
 
 ```
 vagrant up
-npm run watch
+npm start
 ```

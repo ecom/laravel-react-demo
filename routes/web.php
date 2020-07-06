@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::prefix('api')->group(function () {
+    Route::resources([
+        'images' => 'ImageController',
+        'users' => 'UserController',
+    ]);
+});
+
 Route::get('/admin/{any?}', function () {
     return view('admin');
 })->where('any', '.*');
