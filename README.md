@@ -24,7 +24,6 @@ php vendor/bin/homestead make
 vagrant up
 vagrant ssh
 php artisan migrate
-php artisan storage:link
 exit
 
 npm start
