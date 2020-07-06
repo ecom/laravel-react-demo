@@ -32,7 +32,7 @@ export default function UserCard({ user }: UserCardProps) {
                         {user.name}
                     </Typography>
                     <Typography variant="subtitle2" component="p">
-                        {user.name}
+                        {user.location}
                     </Typography>
                 </CardContent>
             </CardActionArea>

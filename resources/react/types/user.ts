@@ -7,4 +7,5 @@ export interface User extends Model {
     avatar?: Image;
     portrait_id?: number;
     portrait?: Image;
+    location?: string;
 }
