@@ -3,6 +3,7 @@ import axios from "axios";
 import Banner from "./Banner";
 import { User } from "../types/user";
 import UserCard from "./users/UserCard";
+import UserGrid from "./users/UserGrid";
 
 export default function Home() {
     const [users, setUsers] = useState([] as User[]);
@@ -20,9 +21,11 @@ export default function Home() {
     return (
         <div>
             <Banner src="https://source.unsplash.com/RnCPiXixooY/1920x1080" />
-            {users.map(u => (
-                <UserCard key={u.id} user={u} />
-            ))}
+            <UserGrid>
+                {users.map(u => (
+                    <UserCard key={u.id} user={u} />
+                ))}
+            </UserGrid>
         </div>
     );
 }
