@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Navbar() {
     const classes = useStyles();
+    console.log(process.env.APP_NAME);
     return (
         <AppBar className={classes.root} position="fixed" color="transparent">
             <Toolbar variant="dense">
@@ -74,18 +75,21 @@ export default function Navbar() {
                     variant="h6"
                     noWrap
                 >
-                    ECOM
+                    {process.env.MIX_APP_NAME}
                 </Link>
                 <SearchBox />
-                <Button color="inherit" component={RRLink} to="/creatives">
-                    Creatives
-                </Button>
-                <Button color="inherit" component={RRLink} to="/organizations">
-                    Organizations
-                </Button>
-                <Button color="inherit" component={RRLink} to="/about">
-                    About
-                </Button>
+                <div className={classes.sectionDesktop}>
+                    <Button
+                        color="inherit"
+                        component={RRLink}
+                        to="/organizations"
+                    >
+                        Organizations
+                    </Button>
+                    <Button color="inherit" component={RRLink} to="/about">
+                        About
+                    </Button>
+                </div>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                     <IconButton aria-label="show 4 new mails" color="inherit">
