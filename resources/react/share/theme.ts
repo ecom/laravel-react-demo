@@ -16,7 +16,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             outlined: {
-                borderWidth: 2
+                borderWidth: "2px !important"
             }
         }
     }

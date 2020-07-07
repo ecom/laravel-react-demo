@@ -10,8 +10,12 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/manifest.js') }}"></script>
-    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script>
+        window.user = {!! auth()->user() ? auth()->user()->toJson() : 'null' !!};
+    </script>
+
+    <script src="{{ asset('js/manifest.js') }}" defer></script>
+    <script src="{{ asset('js/vendor.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->

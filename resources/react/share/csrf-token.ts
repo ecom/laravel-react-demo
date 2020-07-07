@@ -1,7 +1,7 @@
 const element = document.head.querySelector('meta[name="csrf-token"]');
 
-export function getCsrfToken(): string | null {
-    return element?.getAttribute("content") || null;
+export function getCsrfToken(): string {
+    return element?.getAttribute("content") || "";
 }
 
 export function refreshCsrfToken(): void {
