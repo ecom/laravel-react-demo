@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import theme from "../share/theme";
+import theme from "./share/theme";
 import Navbar from "./Navbar";
 import Home from "./HomePage";
 

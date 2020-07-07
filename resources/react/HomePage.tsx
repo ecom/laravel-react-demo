@@ -5,7 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import Banner from "./Banner";
-import { User } from "../types/user";
+import { User } from "./types/user";
 import UserCard from "./users/UserCard";
 import UserGrid from "./users/UserGrid";
 
