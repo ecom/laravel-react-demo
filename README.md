@@ -23,7 +23,7 @@ php vendor/bin/homestead make
 
 vagrant up
 vagrant ssh
-php artisan migrate
+php artisan migrate --seed
 exit
 
 npm start
@@ -34,4 +34,14 @@ npm start
 ```
 vagrant up
 npm start
+```
+
+### Test Account
+
+```
+username:   admin@example.com
+password:   password
+
+username:   user@example.com
+password:   password
 ```
