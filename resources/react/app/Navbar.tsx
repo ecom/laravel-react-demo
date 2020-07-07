@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Navbar() {
     const classes = useStyles();
-    console.log(process.env.APP_NAME);
     return (
         <AppBar className={classes.root} position="fixed" color="transparent">
             <Toolbar variant="dense">
