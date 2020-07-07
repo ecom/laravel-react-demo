@@ -3,12 +3,12 @@ import { User } from "../types/user";
 
 export interface WithAuthProps {
     user: User | null;
-    setUser: (user: User) => void;
+    setUser: (user: User | null) => void;
 }
 
 const AuthContext = React.createContext<WithAuthProps>({
     user: null,
-    setUser: (user: User) => {}
+    setUser: (user: User | null) => {}
 });
 
 export interface AuthProviderProps {

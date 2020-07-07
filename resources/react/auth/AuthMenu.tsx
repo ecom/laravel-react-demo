@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { withAuth, WithAuthProps } from "./AuthContext";
+import { logout } from "./service";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,6 +32,11 @@ function AuthMenu({ user, setUser }: WithAuthProps) {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        setAnchorEl(null);
+        logout().then(() => setUser(null));
     };
 
     return (
@@ -62,7 +68,7 @@ function AuthMenu({ user, setUser }: WithAuthProps) {
                     <>
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>Settings</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </>
                 ) : (
                     <>
