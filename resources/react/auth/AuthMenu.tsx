@@ -64,30 +64,46 @@ function AuthMenu({ user, setUser }: WithAuthProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                {user ? (
-                    <>
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>Settings</MenuItem>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                    </>
-                ) : (
-                    <>
-                        <MenuItem
-                            onClick={handleClose}
-                            component={RRLink}
-                            to="/login"
-                        >
-                            Login
-                        </MenuItem>
-                        <MenuItem
-                            onClick={handleClose}
-                            component={RRLink}
-                            to="/register"
-                        >
-                            Register
-                        </MenuItem>
-                    </>
-                )}
+                {user
+                    ? [
+                          <MenuItem
+                              key="profile"
+                              onClick={handleClose}
+                              component={RRLink}
+                              to={"/users/" + user.id}
+                          >
+                              Profile
+                          </MenuItem>,
+                          <MenuItem
+                              key="settings"
+                              onClick={handleClose}
+                              component={RRLink}
+                              to="/settings"
+                          >
+                              Settings
+                          </MenuItem>,
+                          <MenuItem key="logout" onClick={handleLogout}>
+                              Logout
+                          </MenuItem>
+                      ]
+                    : [
+                          <MenuItem
+                              key="login"
+                              onClick={handleClose}
+                              component={RRLink}
+                              to="/login"
+                          >
+                              Login
+                          </MenuItem>,
+                          <MenuItem
+                              key="register"
+                              onClick={handleClose}
+                              component={RRLink}
+                              to="/register"
+                          >
+                              Register
+                          </MenuItem>
+                      ]}
             </Menu>
         </>
     );
