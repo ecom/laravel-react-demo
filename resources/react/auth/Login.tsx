@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, ChangeEvent } from "react";
-import { Link as RRLink } from "react-router-dom";
+import { Link as RRLink, Redirect } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -13,8 +13,8 @@ import TextField from "@material-ui/core/TextField";
 
 import Banner from "../Banner";
 
-import { getCsrfToken } from "../share/csrf-token";
-import axios from "axios";
+import { login } from "./service";
+import { withAuth, WithAuthProps } from "./AuthContext";
 
 const useStyles = makeStyles({
     buttonRow: {
@@ -24,19 +24,35 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Login() {
+export interface LoginErrors {
+    message: string;
+    errors?: {
+        email?: string[];
+        password?: string[];
+    };
+}
+
+function Login({ user, setUser }: WithAuthProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
+    const [errors, setErrors] = useState<LoginErrors | null>(null);
     const classes = useStyles();
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        axios.post("/login", {
-            email,
-            password,
-            remember
-        });
+        login(email, password, remember)
+            .then(res => {
+                setUser(res.data);
+            })
+            .catch(err => {
+                setErrors(err.response.data as LoginErrors);
+            });
     };
+
+    if (user) {
+        return <Redirect to="/" />;
+    }
+
     return (
         <div>
             <Banner src="https://source.unsplash.com/YP2MNNId-Qs/1920x480" />
@@ -48,10 +64,13 @@ export default function Login() {
                             name="email"
                             fullWidth
                             required
+                            type="email"
                             value={email}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                 setEmail(e.target.value)
                             }
+                            error={!!errors?.errors?.email}
+                            helperText={errors?.errors?.email?.join(" ")}
                         />
                     </Box>
                     <Box my={3}>
@@ -60,6 +79,7 @@ export default function Login() {
                             name="password"
                             fullWidth
                             required
+                            type="password"
                             value={password}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
                                 setPassword(e.target.value)
@@ -68,7 +88,13 @@ export default function Login() {
                     </Box>
                     <Box my={3}>
                         <FormControlLabel
-                            control={<Checkbox name="remember" />}
+                            control={
+                                <Checkbox
+                                    name="remember"
+                                    checked={remember}
+                                    onChange={() => setRemember(!remember)}
+                                />
+                            }
                             label="Remember me"
                         />
                     </Box>
@@ -89,3 +115,5 @@ export default function Login() {
         </div>
     );
 }
+
+export default withAuth(Login);
