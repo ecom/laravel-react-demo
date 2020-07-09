@@ -1,26 +1,15 @@
 import React, { FormEvent, useState, ChangeEvent } from "react";
 import { Link as RRLink, Redirect } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
-
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 
 import { register } from "./service";
 import { withAuth, WithAuthProps } from "./AuthContext";
 import AuthLayout from "./AuthLayout";
-
-const useStyles = makeStyles({
-    buttonRow: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-    }
-});
 
 export interface RegisterErrors {
     message: string;
@@ -33,25 +22,28 @@ export interface RegisterErrors {
 }
 
 function Register({ user, setUser }: WithAuthProps) {
+    const [loading, setLoading] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [errors, setErrors] = useState<RegisterErrors | null>(null);
-    const classes = useStyles();
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         register(name, email, password, passwordConfirmation)
             .then(res => {
+                setLoading(false);
                 setUser(res.data);
             })
             .catch(err => {
+                setLoading(false);
                 setErrors(err.response.data as RegisterErrors);
             });
     };
 
     if (user) {
-        return <Redirect to="/" />;
+        return <Redirect to="/email/verify" />;
     }
 
     return (
@@ -120,7 +112,13 @@ function Register({ user, setUser }: WithAuthProps) {
                     />
                 </Box>
                 <Box my={3}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        endIcon={loading && <CircularProgress size={24} />}
+                        disabled={loading}
+                    >
                         Register
                     </Button>
                 </Box>

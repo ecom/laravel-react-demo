@@ -26,3 +26,7 @@ export function register(
         password_confirmation
     });
 }
+
+export function resendEmail() {
+    return axios.post("/email/resend");
+}

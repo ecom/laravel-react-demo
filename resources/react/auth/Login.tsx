@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
@@ -17,8 +18,8 @@ import AuthLayout from "./AuthLayout";
 const useStyles = makeStyles({
     buttonRow: {
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "space-between"
     }
 });
 
@@ -31,6 +32,7 @@ export interface LoginErrors {
 }
 
 function Login({ user, setUser }: WithAuthProps) {
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
@@ -38,11 +40,14 @@ function Login({ user, setUser }: WithAuthProps) {
     const classes = useStyles();
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         login(email, password, remember)
             .then(res => {
+                setLoading(false);
                 setUser(res.data);
             })
             .catch(err => {
+                setLoading(false);
                 setErrors(err.response.data as LoginErrors);
             });
     };
@@ -95,7 +100,13 @@ function Login({ user, setUser }: WithAuthProps) {
                     />
                 </Box>
                 <Box className={classes.buttonRow}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        endIcon={loading && <CircularProgress size={24} />}
+                        disabled={loading}
+                    >
                         Login
                     </Button>
                     <Link component={RRLink} to="/password/reset">

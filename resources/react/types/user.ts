@@ -3,9 +3,10 @@ import { Model } from "./model";
 
 export interface User extends Model {
     name: string;
-    avatar_id?: number;
-    avatar?: Image;
-    portrait_id?: number;
-    portrait?: Image;
-    location?: string;
+    avatar_id: number | null;
+    avatar: Image | null;
+    portrait_id: number | null;
+    portrait: Image | null;
+    location: string | null;
+    email_verified_at: string | null;
 }
