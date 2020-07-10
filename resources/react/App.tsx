@@ -10,6 +10,7 @@ import { AuthProvider } from "./auth/AuthContext";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import VerifyEmail from "./auth/VerifyEmail";
+import Settings from "./users/Settings";
 
 const useStyles = makeStyles({
     root: {
@@ -44,6 +45,9 @@ export default function App() {
                             <Route path="/about">About</Route>
                             <Route path="/creatives">Creatives</Route>
                             <Route path="/organizations">Organizations</Route>
+                            <Route path="/settings">
+                                <Settings />
+                            </Route>
                             <Route path="/">
                                 <Home />
                             </Route>
