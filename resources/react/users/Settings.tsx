@@ -6,7 +6,8 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 
 import { withAuth, WithAuthProps } from "../auth/AuthContext";
-import ImageUpload from "../images/ImageUpload";
+import ImageUploadCard from "../images/ImageUploadCard";
+import ImageUploadGrid from "../images/ImageUploadGrid";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,7 +24,8 @@ function Settings({ user, setUser }: WithAuthProps) {
         <Container className={classes.root} maxWidth="sm">
             <Typography variant="h1">Settings</Typography>
             <Typography variant="h2">Images</Typography>
-            <ImageUpload />
+            <ImageUploadCard />
+            <ImageUploadGrid />
         </Container>
     );
 }

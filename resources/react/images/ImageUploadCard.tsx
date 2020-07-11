@@ -3,12 +3,14 @@ import React, { useRef, useState, ChangeEvent } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
 import CloudUploadIcon from "@material-ui/icons/CloudUploadOutlined";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+
 import { readFileAsDataString } from "./image-file-utils";
 
 const size = 200;
@@ -21,10 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
             height: size,
             marginTop: theme.spacing(2)
         },
-        card: {
+        actionArea: {
             width: "100%",
-            height: "100%",
-            cursor: "pointer"
+            height: "100%"
         },
         image: {
             width: "100%",
@@ -52,11 +53,21 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export interface ImageUploadProps {
-    onSelect: (files: FileList) => void;
+export interface ImageUploadCardProps {
+    image?: string;
+    disabled?: boolean;
+    multiple?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, dataUrl?: string) => void;
+    onRemove?: () => void;
 }
 
-export default function ImageUpload() {
+export default function ImageUploadCard({
+    image,
+    multiple,
+    disabled,
+    onChange,
+    onRemove
+}: ImageUploadCardProps) {
     const classes = useStyles();
     const input = useRef<HTMLInputElement>(null);
     const [localImage, setLocalImage] = useState<string | null>(null);
@@ -66,6 +77,10 @@ export default function ImageUpload() {
     };
 
     const handleRemove = () => {
+        if (onRemove) {
+            onRemove();
+        }
+
         if (input.current) {
             input.current.value = "";
         }
@@ -75,24 +90,26 @@ export default function ImageUpload() {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target;
         if (input.files && input.files[0]) {
-            readFileAsDataString(input.files[0]).then(data =>
-                setLocalImage(data)
-            );
+            readFileAsDataString(input.files[0]).then(data => {
+                if (onChange) {
+                    onChange(e, data);
+                }
+                setLocalImage(data);
+            });
         }
     };
 
     return (
-        <div className={classes.root}>
-            <Card
-                className={classes.card}
-                variant="outlined"
+        <Card className={classes.root} variant="outlined">
+            <CardActionArea
+                className={classes.actionArea}
                 onClick={handleSelect}
             >
                 {localImage ? (
                     <CardMedia
                         className={classes.image}
                         component="img"
-                        image={localImage}
+                        image={localImage || image}
                     />
                 ) : (
                     <div className={classes.placeholder}>
@@ -100,13 +117,15 @@ export default function ImageUpload() {
                         <Typography>Upload Image</Typography>
                     </div>
                 )}
-            </Card>
+            </CardActionArea>
             <input
                 ref={input}
                 type="file"
                 accept="image/*"
                 hidden
                 onChange={handleChange}
+                disabled={disabled}
+                multiple={multiple}
             />
             {localImage && (
                 <IconButton
@@ -117,6 +136,6 @@ export default function ImageUpload() {
                     <RemoveCircleIcon />
                 </IconButton>
             )}
-        </div>
+        </Card>
     );
 }
