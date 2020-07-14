@@ -83,7 +83,6 @@ class UserSeeder extends Seeder
             if (Storage::missing($file_path)) {
                 Storage::put($file_path, file_get_contents($url));
             }
-            $image->file_path = $file_path;
             $image->file_path_large = $file_path;
             $image->file_path_medium = $file_path;
             $image->file_path_small = $file_path;

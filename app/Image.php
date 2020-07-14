@@ -12,7 +12,7 @@ class Image extends Model
      * @var array
      */
     protected $appends = [
-        'file_url', 'file_url_large', 'file_url_medium', 'file_url_small'
+        'file_url_large', 'file_url_medium', 'file_url_small'
     ];
 
     /**
@@ -21,16 +21,6 @@ class Image extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    /**
-     * Get the full file url of the image.
-     *
-     * @return string
-     */
-    public function getFileUrlAttribute()
-    {
-        return asset($this->attributes['file_path']);
     }
 
     /**

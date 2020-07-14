@@ -56,14 +56,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface ImageUploadCardProps {
     image?: string;
     disabled?: boolean;
-    multiple?: boolean;
-    onChange?: (e: ChangeEvent<HTMLInputElement>, dataUrl?: string) => void;
+    onChange?: (file: File | null, dataUrl: string) => void;
     onRemove?: () => void;
 }
 
 export default function ImageUploadCard({
     image,
-    multiple,
     disabled,
     onChange,
     onRemove
@@ -90,9 +88,10 @@ export default function ImageUploadCard({
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target;
         if (input.files && input.files[0]) {
-            readFileAsDataString(input.files[0]).then(data => {
+            const file = input.files[0];
+            readFileAsDataString(file).then(data => {
                 if (onChange) {
-                    onChange(e, data);
+                    onChange(file, data);
                 }
                 setLocalImage(data);
             });
@@ -125,7 +124,6 @@ export default function ImageUploadCard({
                 hidden
                 onChange={handleChange}
                 disabled={disabled}
-                multiple={multiple}
             />
             {localImage && (
                 <IconButton
