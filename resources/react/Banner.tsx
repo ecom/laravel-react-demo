@@ -6,6 +6,7 @@ const useStyles = makeStyles({
         display: "block",
         width: "100%",
         maxHeight: 600,
+        minHeight: 300,
         objectFit: "cover",
         objectPosition: "center"
     }

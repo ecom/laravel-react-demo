@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./share/bootstrap";
+import "./config/bootstrap";
 import App from "./App";
 
 const root = document.getElementById("app-root");
