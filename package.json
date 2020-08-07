@@ -19,7 +19,7 @@
         "@types/react-dom": "^16.9.8",
         "@types/react-router-dom": "^5.1.5",
         "axios": "^0.19.2",
-        "browser-sync": "^2.26.7",
+        "browser-sync": "^2.26.12",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0.2",
         "laravel-mix": "^5.0.1",
