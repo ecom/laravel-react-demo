@@ -4,5 +4,4 @@ export interface NavigationItem {
     text: ReactNode;
     href: string;
     icon?: ReactNode;
-    exact?: boolean;
 }

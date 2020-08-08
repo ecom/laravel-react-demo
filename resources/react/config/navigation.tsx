@@ -7,22 +7,20 @@ import PersonIcon from "@material-ui/icons/Person";
 import { NavigationItem } from "../types/navigation";
 
 const navigationConfig: {
-    elevation: number;
     topItems: NavigationItem[];
     bottomItems: NavigationItem[];
 } = {
-    elevation: 5, // https://material-ui.com/system/shadows/
     topItems: [],
     bottomItems: [
-        { text: "Home", href: "/", exact: true, icon: <HomeIcon /> },
+        { text: "Home", href: "/", icon: <HomeIcon /> },
         {
             text: "Organizations",
             href: "/orgs",
-            exact: true,
+
             icon: <PeopleIcon />
         },
-        { text: "Blog", href: "/blog", exact: true, icon: <BookIcon /> },
-        { text: "User", href: "/user", exact: true, icon: <PersonIcon /> }
+        { text: "Blog", href: "/blog", icon: <BookIcon /> },
+        { text: "User", href: "/user", icon: <PersonIcon /> }
     ]
 };
 

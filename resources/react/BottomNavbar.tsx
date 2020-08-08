@@ -13,6 +13,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Box from "@material-ui/core/Box";
 
 import { NavigationItem } from "./types/navigation";
+import Slide from "@material-ui/core/Slide";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,28 +50,31 @@ export default function BottomNavbar({
 }: BottomNavbarProps) {
     const classes = useStyles();
     const location = useLocation();
+    const show = !!items.find(item => item.href === location.pathname);
     return (
         <>
             <BottomNavigation className={classes.placeholder} />
-            <Box className={classes.root} boxShadow={elevation}>
-                <BottomNavigation
-                    className={classes.navbar}
-                    showLabels
-                    value={location.pathname}
-                >
-                    {items.map(item => (
-                        <BottomNavigationAction
-                            key={item.href}
-                            label={item.text}
-                            value={item.href}
-                            icon={item.icon}
-                            component={NavLink}
-                            exact={item.exact}
-                            to={item.href}
-                        />
-                    ))}
-                </BottomNavigation>
-            </Box>
+            <Slide direction="up" in={show}>
+                <Box className={classes.root} boxShadow={elevation}>
+                    <BottomNavigation
+                        className={classes.navbar}
+                        showLabels
+                        value={location.pathname}
+                    >
+                        {items.map(item => (
+                            <BottomNavigationAction
+                                key={item.href}
+                                label={item.text}
+                                value={item.href}
+                                icon={item.icon}
+                                component={NavLink}
+                                exact
+                                to={item.href}
+                            />
+                        ))}
+                    </BottomNavigation>
+                </Box>
+            </Slide>
         </>
     );
 }

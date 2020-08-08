@@ -53,19 +53,12 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export interface NavbarProps {
-    elevation?: number;
-}
+export interface NavbarProps {}
 
-export default function Navbar({ elevation = 3 }: NavbarProps) {
+export default function Navbar({}: NavbarProps) {
     const classes = useStyles();
     return (
-        <AppBar
-            className={classes.root}
-            position="fixed"
-            color="transparent"
-            elevation={elevation}
-        >
+        <AppBar className={classes.root} position="fixed" color="transparent">
             <Toolbar variant="dense">
                 <IconButton
                     edge="start"

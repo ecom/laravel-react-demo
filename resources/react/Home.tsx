@@ -8,6 +8,7 @@ import Banner from "./Banner";
 import { User } from "./types/user";
 import UserCard from "./users/UserCard";
 import UserGrid from "./users/UserGrid";
+import Page from "./Page";
 
 export default function Home() {
     const [users, setUsers] = useState([] as User[]);
@@ -24,7 +25,7 @@ export default function Home() {
     });
 
     return (
-        <div>
+        <Page>
             <Banner src="https://source.unsplash.com/RnCPiXixooY/1920x1080" />
             <Tabs
                 value={tab}
@@ -41,6 +42,6 @@ export default function Home() {
                     <UserCard key={u.id} user={u} />
                 ))}
             </UserGrid>
-        </div>
+        </Page>
     );
 }

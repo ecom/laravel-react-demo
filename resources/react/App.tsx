@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { AnimatedSwitch } from "react-router-transition";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -21,6 +22,12 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         overflowX: "hidden"
+    },
+    animatedSwitch: {
+        position: "relative",
+        "& > div": {
+            position: "absolute"
+        }
     }
 });
 
@@ -34,7 +41,12 @@ export default function App() {
                     <div className={classes.root}>
                         <Navbar />
 
-                        <Switch>
+                        <AnimatedSwitch
+                            atLeave={{ opacity: 0 }}
+                            atEnter={{ opacity: 0 }}
+                            atActive={{ opacity: 1 }}
+                            className={classes.animatedSwitch}
+                        >
                             <Route path="/login">
                                 <Login />
                             </Route>
@@ -57,12 +69,9 @@ export default function App() {
                             <Route>
                                 <NotFound />
                             </Route>
-                        </Switch>
+                        </AnimatedSwitch>
 
-                        <BottomNavbar
-                            elevation={navigationConfig.elevation}
-                            items={navigationConfig.bottomItems}
-                        />
+                        <BottomNavbar items={navigationConfig.bottomItems} />
                     </div>
                 </Router>
             </ThemeProvider>
