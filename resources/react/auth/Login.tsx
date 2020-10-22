@@ -12,7 +12,7 @@ import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 
 import { login } from "./service";
-import { withAuth, WithAuthProps } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 import AuthLayout from "./AuthLayout";
 
 const useStyles = makeStyles({
@@ -31,13 +31,14 @@ export interface LoginErrors {
     };
 }
 
-function Login({ user, setUser }: WithAuthProps) {
+export default function Login() {
+    const classes = useStyles();
+    const { user, setUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
     const [errors, setErrors] = useState<LoginErrors | null>(null);
-    const classes = useStyles();
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -117,5 +118,3 @@ function Login({ user, setUser }: WithAuthProps) {
         </AuthLayout>
     );
 }
-
-export default withAuth(Login);

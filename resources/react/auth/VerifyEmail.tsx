@@ -6,7 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 
-import { withAuth, WithAuthProps } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 import AuthLayout from "./AuthLayout";
 import { resendEmail } from "./service";
 import { Redirect } from "react-router-dom";
@@ -16,7 +16,8 @@ interface Result {
     data: any;
 }
 
-function VerifyEmail({ user }: WithAuthProps) {
+export default function VerifyEmail() {
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<boolean | null>(null);
 
@@ -78,5 +79,3 @@ function VerifyEmail({ user }: WithAuthProps) {
         </AuthLayout>
     );
 }
-
-export default withAuth(VerifyEmail);

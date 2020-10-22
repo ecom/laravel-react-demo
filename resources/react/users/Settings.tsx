@@ -5,7 +5,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 
-import { withAuth, WithAuthProps } from "../auth/AuthContext";
+import { useAuth } from "../auth/AuthContext";
 import ImageUploadCard from "../images/ImageUploadCard";
 import ImageUploadGrid from "../images/ImageUploadGrid";
 import { upload } from "../images/service";
@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function Settings({ user, setUser }: WithAuthProps) {
+export default function Settings() {
     const classes = useStyles();
+    const { user, setUser } = useAuth();
 
     return (
         <Container className={classes.root} maxWidth="sm">
@@ -36,5 +37,3 @@ function Settings({ user, setUser }: WithAuthProps) {
         </Container>
     );
 }
-
-export default withAuth(Settings);

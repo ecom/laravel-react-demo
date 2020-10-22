@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { withAuth, WithAuthProps } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 import { logout } from "./service";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function AuthMenu({ user, setUser }: WithAuthProps) {
+export default function AuthMenu() {
     const classes = useStyles();
-
+    const { user, setUser } = useAuth();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,5 +108,3 @@ function AuthMenu({ user, setUser }: WithAuthProps) {
         </>
     );
 }
-
-export default withAuth(AuthMenu);

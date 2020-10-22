@@ -1,12 +1,12 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, useContext, ReactNode } from "react";
 import { User } from "../types/user";
 
-export interface WithAuthProps {
+export interface AuthProps {
     user: User | null;
     setUser: (user: User | null) => void;
 }
 
-const AuthContext = React.createContext<WithAuthProps>({
+const AuthContext = React.createContext<AuthProps>({
     user: null,
     setUser: (user: User | null) => {}
 });
@@ -24,10 +24,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     );
 }
 
-export const withAuth = <P extends object>(
-    Component: React.ComponentType<P & WithAuthProps>
-) => (props: P) => (
-    <AuthContext.Consumer>
-        {(authProps: WithAuthProps) => <Component {...authProps} {...props} />}
-    </AuthContext.Consumer>
-);
+/**
+ * Auth hook for function components
+ */
+export function useAuth() {
+    return useContext(AuthContext);
+}

@@ -8,7 +8,7 @@ import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 
 import { register } from "./service";
-import { withAuth, WithAuthProps } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 import AuthLayout from "./AuthLayout";
 
 export interface RegisterErrors {
@@ -21,7 +21,8 @@ export interface RegisterErrors {
     };
 }
 
-function Register({ user, setUser }: WithAuthProps) {
+export default function Register() {
+    const { user, setUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -137,5 +138,3 @@ function Register({ user, setUser }: WithAuthProps) {
         </AuthLayout>
     );
 }
-
-export default withAuth(Register);
