@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -92,15 +94,15 @@ class UserSeeder extends Seeder
             $user->save();
         };
 
-        factory(App\User::class, 1)->create([
+        \App\Models\User::factory(1)->create([
             'email' => 'admin@example.com',
             'role' => 'admin',
         ])->each($create_image);
 
-        factory(App\User::class, 1)->create([
+        \App\Models\User::factory(1)->create([
             'email' => 'user@example.com',
         ])->each($create_image);
 
-        factory(App\User::class, 48)->create()->each($create_image);
+        \App\Models\User::factory(48)->create()->each($create_image);
     }
 }
