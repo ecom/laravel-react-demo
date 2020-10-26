@@ -54,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function avatar()
     {
-        return $this->belongsTo('App\Image');
+        return $this->belongsTo('App\Models\Image');
     }
 
     /**
@@ -62,6 +62,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function portrait()
     {
-        return $this->belongsTo('App\Image');
+        return $this->belongsTo('App\Models\Image');
     }
 }

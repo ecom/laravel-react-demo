@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
         ];
 
         $create_image = function ($user) use ($unsplash_image_ids) {
-            $image = new App\Image;
+            $image = new \App\Models\Image;
             $image->user_id = $user->id;
             $url = 'https://source.unsplash.com/' . $unsplash_image_ids[$user->id - 1] . '/1800x2400';
             $file_path = 'images/' . $unsplash_image_ids[$user->id - 1] . '.jpg';

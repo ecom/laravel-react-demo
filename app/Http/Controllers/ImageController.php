@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
+use App\Models\Image;
 use Gmagick;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -90,7 +90,7 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Image  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function show(Image $image)
@@ -102,7 +102,7 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Image  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Image $image)
@@ -113,7 +113,7 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Image  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Image $image)

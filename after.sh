@@ -8,6 +8,7 @@
 # to apply, you may also create user-customizations.sh,
 # which will be run after this script.
 
+sudo apt-get update
 sudo apt-get -y \
     -o Dpkg::Options::="--force-confdef" \
     -o Dpkg::Options::="--force-confold" \
