@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Banner from "./Banner";
+import Banner from "./images/Banner";
 
 export default function NotFound() {
     return (
