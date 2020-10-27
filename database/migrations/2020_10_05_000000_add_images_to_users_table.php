@@ -14,8 +14,8 @@ class AddImagesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('avatar_id')->nullable()->constrained('images');
-            $table->foreignId('portrait_id')->nullable()->constrained('images');
+            $table->foreignId('avatar_id')->after('role')->nullable()->constrained('images');
+            $table->foreignId('portrait_id')->after('avatar_id')->nullable()->constrained('images');
         });
     }
 

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -78,7 +80,7 @@ class UserSeeder extends Seeder
         ];
 
         $create_image = function ($user) use ($unsplash_image_ids) {
-            $image = new \App\Models\Image;
+            $image = new Image;
             $image->user_id = $user->id;
             $url = 'https://source.unsplash.com/' . $unsplash_image_ids[$user->id - 1] . '/1800x2400';
             $file_path = 'images/' . $unsplash_image_ids[$user->id - 1] . '.jpg';
@@ -94,15 +96,15 @@ class UserSeeder extends Seeder
             $user->save();
         };
 
-        \App\Models\User::factory(1)->create([
+        User::factory(1)->create([
             'email' => 'admin@example.com',
             'role' => 'admin',
         ])->each($create_image);
 
-        \App\Models\User::factory(1)->create([
+        User::factory(1)->create([
             'email' => 'user@example.com',
         ])->each($create_image);
 
-        \App\Models\User::factory(48)->create()->each($create_image);
+        User::factory(48)->create()->each($create_image);
     }
 }
