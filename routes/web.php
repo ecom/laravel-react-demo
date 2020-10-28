@@ -18,6 +18,7 @@ Auth::routes(['verify' => true]);
 Route::prefix('api')->group(function () {
     Route::resources([
         'images' => 'App\Http\Controllers\ImageController',
+        'tags' => 'App\Http\Controllers\TagController',
         'users' => 'App\Http\Controllers\UserController',
     ]);
 });
