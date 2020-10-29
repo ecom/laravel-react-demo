@@ -1,5 +1,6 @@
 import { Image } from "./image";
 import { Model } from "./model";
+import { Tag } from "./tag";
 
 export interface User extends Model {
     name: string;
@@ -9,4 +10,5 @@ export interface User extends Model {
     portrait: Image | null;
     location: string | null;
     email_verified_at: string | null;
+    tags: Tag[];
 }

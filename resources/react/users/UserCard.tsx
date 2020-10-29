@@ -8,7 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import { User } from "../types/user";
 
 const useStyles = makeStyles({
-    root: {}
+    root: {},
+    name: {
+        whiteSpace: "nowrap"
+    }
 });
 
 export interface UserCardProps {
@@ -28,11 +31,20 @@ export default function UserCard({ user }: UserCardProps) {
                     title={user.name}
                 />
                 <CardContent>
-                    <Typography variant="h6" component="h2">
+                    <Typography
+                        className={classes.name}
+                        variant="h6"
+                        component="h2"
+                    >
                         {user.name}
                     </Typography>
                     <Typography variant="subtitle2" component="p">
                         {user.location}
+                    </Typography>
+                    <Typography variant="caption" component="p">
+                        {user.tags.map(tag => (
+                            <span> #{tag.name} </span>
+                        ))}
                     </Typography>
                 </CardContent>
             </CardActionArea>
