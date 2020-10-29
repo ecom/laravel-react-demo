@@ -47,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $with = ['avatar', 'portrait'];
+    protected $with = ['avatar', 'portrait', 'tags'];
 
     /**
      * Get the user avatar.
@@ -63,5 +63,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function portrait()
     {
         return $this->belongsTo('App\Models\Image');
+    }
+
+    /**
+     * Get all of the tags for the user.
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Models\Tag', 'taggable');
     }
 }

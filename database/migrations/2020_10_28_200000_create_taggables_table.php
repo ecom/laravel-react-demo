@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagTranslationsTable extends Migration
+class CreateTaggablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateTagTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_translations', function (Blueprint $table) {
-            $table->id();
+        Schema::create('taggables', function (Blueprint $table) {
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            $table->string('locale')->index();
-            $table->string('name');
-            $table->text('description');
-
-            $table->unique(['tag_id', 'locale']);
+            $table->morphs('taggable');
         });
     }
 
@@ -31,6 +26,6 @@ class CreateTagTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_translations');
+        Schema::dropIfExists('taggables');
     }
 }
