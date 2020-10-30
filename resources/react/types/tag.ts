@@ -1,15 +1,13 @@
-export interface Tag {
-    id: number;
+import { Model } from "./model";
+
+export interface Tag extends Model {
     slug: string;
     name: string;
     description: string;
     translations: TagTranslation[];
-    created_at: string;
-    updated_at: string;
 }
 
-export interface TagTranslation {
-    id: number;
+export interface TagTranslation extends Model {
     tag_id: number;
     locale: string;
     name: string;
