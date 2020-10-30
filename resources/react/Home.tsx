@@ -26,7 +26,11 @@ export default function Home() {
 
     return (
         <Page>
-            <Banner src="https://source.unsplash.com/RnCPiXixooY/1920x1080" />
+            <Banner
+                src="https://source.unsplash.com/RnCPiXixooY/1920x480"
+                width="1920"
+                height="480"
+            />
             <Tabs
                 value={tab}
                 onChange={(e, v) => setTab(v)}
